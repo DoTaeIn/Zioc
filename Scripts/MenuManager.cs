@@ -166,7 +166,7 @@ public class MenuManager : MonoBehaviour
         menus.MainMenuPanel.SetActive(true);
         _infoManager.SubjectNamesList.Clear();
         _infoManager.SaveInfo.Clear();
-        Directory.Delete(_saveNLoad.SAVE_DATA_DIRECTORY, true);
+        Directory.Delete(Application.dataPath + "/Data_File", true);
     }
 
     public void EditButtonFunc()
@@ -176,7 +176,7 @@ public class MenuManager : MonoBehaviour
         {
             Instantiate(InputPrefab).transform.parent = ContentofInput.transform;
             SavedButtonScript _script = FindObjectOfType<SavedButtonScript>();
-            _script.MadeInputs(_infoManager.SubjectNamesList[i], _infoManager.SaveInfo[_infoManager.SubjectNamesList[i]]);
+            _script.MadeInputs(_infoManager.SubjectNamesList[i], _infoManager.SaveInfo[_infoManager.SubjectNamesList[i]], _infoManager.CodeNToken[i]);
         }
         
         foreach (Transform child in ContentofButton.transform)
@@ -208,11 +208,12 @@ public class MenuManager : MonoBehaviour
             SavedConnectButtonScript buttonScript = FindObjectOfType<SavedConnectButtonScript>();
             string Name = _infoManager.SubjectNamesList[i];
             string Code = _infoManager.SaveInfo[_infoManager.SubjectNamesList[i]];
-            buttonScript.SaveCode(Name, Code);
+            string token = _infoManager.CodeNToken[i];
+            buttonScript.SaveCode(Name, Code, token);
         }
     }
 
-    public void LoadedMakeButtons(List<string> Name, List<string> Code)
+    public void LoadedMakeButtons(List<string> Name, List<string> Code, List<string> token)
     {
         if (Directory.Exists(_saveNLoad.SAVE_DATA_DIRECTORY))
         {
@@ -223,7 +224,7 @@ public class MenuManager : MonoBehaviour
                 menus.SavedPanel.SetActive(true);
                 Instantiate(ButtonPrefab).transform.parent = ContentofButton.transform;
                 SavedConnectButtonScript buttonScript = FindObjectOfType<SavedConnectButtonScript>();
-                buttonScript.SaveCode(Name[i], Code[i]);
+                buttonScript.SaveCode(Name[i], Code[i], token[i]);
             }
         }
 

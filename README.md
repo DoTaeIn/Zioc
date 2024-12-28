@@ -1,4 +1,4 @@
-# Zioc
+# Zioc [DEPRECATED]
 [![Kotlin](https://img.shields.io/badge/youtube-Proemthena-red.svg?logo=youtube)](https://www.youtube.com/channel/UCckXpOKbGSaPO1Gg35Vw13A)
 
 This is Zioc (Zoom in one click) app!
